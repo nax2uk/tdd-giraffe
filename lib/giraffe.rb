@@ -1,25 +1,22 @@
 class RomanNumeral
     def convert(num = nil)
         return nil unless num
+        ones = num % 10
+        tens = num % 100 / 10
+        hundreds = num % 1000 / 100
         
-        if num <= 10
-            return '' << 'I' * (num - 0) if num >= 1 && num <= 3
-            return 'IV' if num == 4
-            return 'V' if num == 5
-            return 'V' << 'I'*(num - 5) if num >= 6 && num <= 8
-            return 'IX' if num == 9
-            return 'X' if num == 10
-            
-        else
-            return 'X' << 'I' * (num - 10) if num >= 11 && num <= 13
-            return 'XIV' if num == 14
-            return 'XV' if num == 15
-            return 'XV' << 'I'*(num - 15) if num >= 16 && num <= 18
-            return 'XIX' if num == 19
-            return 'XX' if num == 20
+        return 'C'*hundreds << convert_helper(tens, 'X', 'L', 'C') << convert_helper(ones, 'I', 'V', 'X') if hundreds == 1
+        return 'C'*hundreds << convert_helper(tens, 'X', 'L', 'C') << convert_helper(ones, 'I', 'V', 'X') 
 
-        end
     end
+
+    def convert_helper(digit, first_symbol, middle_symbol, last_symbol)
+        return first_symbol * (digit) if digit >= 0 && digit <= 3
+        return first_symbol << middle_symbol if digit == 4
+        return middle_symbol << first_symbol*(digit - 5) if digit >= 5 && digit <= 8
+        return first_symbol << last_symbol if digit == 9
+    end
+
 end
 
 # X = 10
