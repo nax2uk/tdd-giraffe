@@ -8,4 +8,4 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem "rspec", "~> 3.9"
 
-gem "guard", "~> 2.16"
+gem "guard", "~> 2.17", ">= 2.17.0"
